@@ -1,24 +1,16 @@
 import './style.css'
 import Sidebar from '@/components/Sidebar'
-import { locales } from 'config.js'
-
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ lng: locale }))
-}
 
 export default async function RootLayout({
-  children,
-  params: {
-    lng
-  }
+  children
 }) {
 
   return (
-    <html lang={lng}>
+    <html lang="en">
       <body>
         <div className="container">
           <div className="main">
-            <Sidebar lng={lng} />
+            <Sidebar />
             <section className="col note-viewer">{children}</section>
           </div>
         </div>

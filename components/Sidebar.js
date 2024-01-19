@@ -4,9 +4,13 @@ import SidebarSearchField from '@/components/SidebarSearchField';
 import SidebarNoteList from '@/components/SidebarNoteList';
 import EditButton from '@/components/EditButton';
 import NoteListSkeleton from '@/components/NoteListSkeleton';
-import { useTranslation } from "@/app/i18n/index.js"
-export default async function Sidebar({lng}) {
-  const { t } = await useTranslation(lng)
+import { useTranslations, NextIntlClientProvider, useMessages} from 'next-intl';
+import SidebarImport from '@/components/SidebarImport';
+
+
+export default function Sidebar() {
+  const t = useTranslations('Basic');
+  const messages = useMessages();
   return (
     <>
       <section className="col sidebar">
@@ -24,7 +28,13 @@ export default async function Sidebar({lng}) {
           </section>
         </Link>
         <section className="sidebar-menu" role="menubar">
-          <SidebarSearchField />
+          <NextIntlClientProvider
+            messages={{
+              Basic: messages.Basic
+            }}
+          >
+            <SidebarSearchField />
+          </NextIntlClientProvider>
           <EditButton noteId={null}>{t('new')}</EditButton>
         </section>
         <nav>
@@ -32,6 +42,7 @@ export default async function Sidebar({lng}) {
             <SidebarNoteList />
           </Suspense>
         </nav>
+        <SidebarImport />
       </section>
     </>
   )
