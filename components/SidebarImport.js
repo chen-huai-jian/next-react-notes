@@ -45,7 +45,7 @@ export default function SidebarImport() {
   return (
     <div style={{ textAlign: "center" }}>
       <label htmlFor="file" style={{ cursor: "pointer" }}>
-        Import .md File
+        Import .md File by API
       </label>
       <input
         type="file"

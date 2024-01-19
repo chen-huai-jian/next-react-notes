@@ -6,6 +6,7 @@ import EditButton from '@/components/EditButton';
 import NoteListSkeleton from '@/components/NoteListSkeleton';
 import { useTranslations, NextIntlClientProvider, useMessages} from 'next-intl';
 import SidebarImport from '@/components/SidebarImport';
+import SidebarImport2 from '@/components/SidebarImport2';
 
 
 export default function Sidebar() {
@@ -43,6 +44,7 @@ export default function Sidebar() {
           </Suspense>
         </nav>
         <SidebarImport />
+        <SidebarImport2 />
       </section>
     </>
   )
