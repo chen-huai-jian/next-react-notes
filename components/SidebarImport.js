@@ -1,12 +1,11 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
-import { useTransition } from 'react'
+import { importNote } from '@/actions'
 
 export default function SidebarImport() {
   const router = useRouter()
-  const [isPending, startTransition] = useTransition();
 
   const onChange = async (e) => {
     const fileInput = e.target;
@@ -22,20 +21,8 @@ export default function SidebarImport() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        console.error("something went wrong");
-        return;
-      }
-
-      const data = await response.json();
-
-      startTransition(() => router.push(`/note/${data.uid}`));
-      startTransition(() => router.refresh());
+      const data = await importNote(formData);
+      router.push(`/note/${data.uid}`)
 
     } catch (error) {
       console.error("something went wrong");
