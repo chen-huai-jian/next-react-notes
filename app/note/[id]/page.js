@@ -1,5 +1,5 @@
 import Note from '@/components/Note'
-import {getNote} from '@/lib/strapi';
+import {getNote} from '@/lib/prisma';
 
 export default async function Page({ params }) {
   const noteId = params.id;
